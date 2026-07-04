@@ -12,9 +12,17 @@ class CandidateReport(BaseModel):
 
     mandatory_match: int
 
+    matched: List[str]
+
+    missing: List[str]
+
+    preferred: List[str]
+
     strengths: List[str]
 
     weaknesses: List[str]
+
+    improvements: List[str]
 
     interview_focus: List[str]
 

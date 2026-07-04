@@ -49,42 +49,40 @@ def retrieve_node(state: GraphState):
     return state
 
 
-def screening_node(state: GraphState):
+def screen_node(state: GraphState):
 
-    results = []
+    screened = []
 
-    for candidate in state["retrieved_candidates"]:
+    # Screen only Top 2 candidates
+    for candidate in state["retrieved_candidates"][:2]:
 
-        results.append(
-
+        screened.append(
             screen_candidate(
                 state["parsed_job"],
                 candidate
             )
-
         )
 
-    state["screened_candidates"] = results
+    state["screened_candidates"] = screened
 
     return state
 
 
 def interview_node(state: GraphState):
 
-    interviews = []
+    questions = []
 
-    for candidate in state["screened_candidates"]:
+    # Generate interview questions only for Top 2 candidates
+    for candidate in state["screened_candidates"][:2]:
 
-        interviews.append(
-
+        questions.append(
             generate_interview_questions(
                 state["parsed_job"],
                 candidate
             )
-
         )
 
-    state["interview_questions"] = interviews
+    state["interview_questions"] = questions
 
     return state
 

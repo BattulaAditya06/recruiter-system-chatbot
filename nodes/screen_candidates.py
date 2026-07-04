@@ -8,8 +8,6 @@ from google import genai
 
 from config import GEMINI_API_KEY
 from config import MODEL_NAME
-
-from schemas.job_schema import JobSchema
 from schemas.screening_schema import ScreeningSchema
 
 client = genai.Client(
@@ -31,63 +29,31 @@ Rules
 
 Examples
 
-DSA == Data Structures and Algorithms
+DSA = Data Structures and Algorithms
 
-OOP == Object Oriented Programming
+OOP = Object Oriented Programming
 
-ML == Machine Learning
+ML = Machine Learning
 
-4. Do not split one skill into multiple skills.
+4. Match mandatory skills.
 
-5. First evaluate mandatory skills.
+5. Match preferred skills.
 
-6. Then evaluate preferred skills.
+6. Identify strengths.
 
-7. Then evaluate projects.
+7. Identify weaknesses.
 
-8. Then education.
+8. Suggest improvements.
 
-Decision Rules
+9. Generate interview focus topics.
 
-SHORTLIST
+IMPORTANT
 
-Mandatory Match >=80%
+Do NOT assign scores.
 
-No major missing skills
+Do NOT decide SHORTLIST/HOLD/REJECT.
 
-----------------------------------
-
-HOLD
-
-Mandatory Match 50-79%
-
-Candidate can be trained
-
-----------------------------------
-
-REJECT
-
-Mandatory Match below 50%
-
-----------------------------------
-
-If decision is SHORTLIST or HOLD
-
-Generate 3-5 interview focus topics.
-
-If decision is REJECT
-
-Interview focus should be empty.
-
-Also provide
-
-Strengths
-
-Weaknesses
-
-Improvement Suggestions
-
-Reasoning
+The application will calculate them.
 
 Return only structured JSON.
 """
@@ -148,10 +114,12 @@ Resume
         preferred / preferred_total * 100
     ) if preferred_total else 0
 
-    overall_score = int(
-        mandatory_percentage * 0.8 +
-        preferred_percentage * 0.2
-    )
+    overall_score = mandatory_percentage
+
+    if preferred_percentage >= 50:
+        overall_score += 5
+
+    overall_score = min(overall_score, 100)
 
     if mandatory_percentage >= 80:
 
@@ -199,9 +167,7 @@ if __name__ == "__main__":
     from nodes.parse_jd import parse_job_description
     from rag.retriever import retrieve_candidate_evidence
 
-    jd_text = load_job_description(
-        "ai_engineer.txt"
-    )
+    jd_text = load_job_description("ai_engineer.txt")
 
     jd = parse_job_description(jd_text)
 
@@ -220,65 +186,63 @@ if __name__ == "__main__":
         print("=" * 70)
 
         print("Candidate :", result["candidate_name"])
-
         print()
 
         print("Mandatory Match :", result["mandatory_match"], "%")
-
         print("Overall Score   :", result["overall_score"])
-
         print("Decision        :", result["decision"])
-
         print()
 
         print("Matched Mandatory Skills")
-
-        print(result["matched"])
+        for skill in result["matched"]:
+            print(f"  ✓ {skill}")
 
         print()
 
         print("Missing Mandatory Skills")
-
-        print(result["missing"])
+        for skill in result["missing"]:
+            print(f"  ✗ {skill}")
 
         print()
 
         print("Preferred Skills")
-
-        print(result["preferred"])
+        if result["preferred"]:
+            for skill in result["preferred"]:
+                print(f"  • {skill}")
+        else:
+            print("  None")
 
         print()
 
         print("Strengths")
-
-        for s in result["strengths"]:
-            print("✓", s)
+        for strength in result["strengths"]:
+            print(f"  ✓ {strength}")
 
         print()
 
         print("Weaknesses")
-
-        for w in result["weaknesses"]:
-            print("-", w)
+        for weakness in result["weaknesses"]:
+            print(f"  ✗ {weakness}")
 
         print()
 
         print("Improvement Suggestions")
-
-        for s in result["improvements"]:
-            print("•", s)
+        for suggestion in result["improvements"]:
+            print(f"  • {suggestion}")
 
         print()
 
         print("Interview Focus")
-
-        for t in result["interview_focus"]:
-            print("•", t)
+        if result["interview_focus"]:
+            for topic in result["interview_focus"]:
+                print(f"  • {topic}")
+        else:
+            print("  None")
 
         print()
 
-        print("Reason")
-
+        print("Reasoning")
         print(result["reasoning"])
 
         print("=" * 70)
+        print()
