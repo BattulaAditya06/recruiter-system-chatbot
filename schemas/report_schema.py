@@ -1,18 +1,36 @@
-from pydantic import BaseModel, Field
+from typing import List
+from pydantic import BaseModel
 
-from schemas.candidate_schema import CandidateSchema
+
+class CandidateReport(BaseModel):
+
+    candidate_name: str
+
+    decision: str
+
+    overall_score: int
+
+    mandatory_match: int
+
+    strengths: List[str]
+
+    weaknesses: List[str]
+
+    interview_focus: List[str]
+
+    reasoning: str
 
 
-class ReportSchema(BaseModel):
+class FinalReport(BaseModel):
 
-    role: str
+    job_title: str
 
-    total_applicants: int
+    candidates_screened: int
 
-    shortlisted_candidates: list[CandidateSchema]
+    shortlisted: int
 
-    rewritten_jd: str
+    hold: int
 
-    salary_benchmark: str
+    rejected: int
 
-    recruiter_decision: str
+    reports: List[CandidateReport]

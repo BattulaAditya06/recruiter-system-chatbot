@@ -1,30 +1,39 @@
-from typing_extensions import TypedDict
+"""
+graph/state.py
+
+Shared state passed between LangGraph nodes.
+"""
+
+from typing import TypedDict, List, Optional
+
+from schemas.job_schema import JobSchema
+from schemas.report_schema import FinalReport
+from schemas.screening_schema import ScreeningResult
+from schemas.interview_schema import InterviewSchema
 
 
-class RecruitmentState(TypedDict):
+class GraphState(TypedDict):
 
-    user_query: str
+    # Raw Input
+    job_description: str
 
-    intent: str
+    # Parsed JD
+    parsed_job: Optional[JobSchema]
 
-    jd_text: str
+    # Rewritten JD
+    rewritten_job: Optional[str]
 
-    parsed_jd: dict
+    # Retrieved Candidates
+    retrieved_candidates: List[dict]
 
-    resumes: list
+    # Screening Results
+    screened_candidates: List[ScreeningResult]
 
-    resume_count: int
+    # Interview Questions
+    interview_questions: List[InterviewSchema]
 
-    shortlisted_candidates: list
+    # Recruiter Decision
+    approval: bool
 
-    selected_candidate: dict
-
-    rewritten_jd: str
-
-    interview_questions: list
-
-    salary_benchmark: str
-
-    recruiter_decision: str
-
-    final_report: str
+    # Final Report
+    final_report: Optional[FinalReport]

@@ -102,15 +102,11 @@ JOB DESCRIPTION
 
 {jd.model_dump_json(indent=2)}
 
-------------------------------------
+Candidate
 
-Candidate Name
+{candidate["candidate_name"]}
 
-{candidate['candidate_name']}
-
-------------------------------------
-
-Resume Evidence
+Resume
 
 {evidence}
 """
@@ -136,31 +132,66 @@ Resume Evidence
 
     result = response.parsed
 
-    mandatory = len(jd.mandatory_skills)
+    mandatory_total = len(jd.mandatory_skills)
 
     matched = len(result.mandatory_skills_matched)
 
-    percentage = 0
+    mandatory_percentage = int(
+        matched / mandatory_total * 100
+    ) if mandatory_total else 0
 
-    if mandatory > 0:
+    preferred_total = len(jd.preferred_skills)
 
-        percentage = int((matched / mandatory) * 100)
+    preferred = len(result.preferred_skills_matched)
 
-    result.mandatory_match_percentage = percentage
+    preferred_percentage = int(
+        preferred / preferred_total * 100
+    ) if preferred_total else 0
 
-    if percentage >= 80:
+    overall_score = int(
+        mandatory_percentage * 0.8 +
+        preferred_percentage * 0.2
+    )
 
-        result.decision = "SHORTLIST"
+    if mandatory_percentage >= 80:
 
-    elif percentage >= 50:
+        decision = "SHORTLIST"
 
-        result.decision = "HOLD"
+    elif mandatory_percentage >= 50:
+
+        decision = "HOLD"
 
     else:
 
-        result.decision = "REJECT"
+        decision = "REJECT"
 
-    return result
+    return {
+
+        "candidate_name": result.candidate_name,
+
+        "mandatory_match": mandatory_percentage,
+
+        "overall_score": overall_score,
+
+        "decision": decision,
+
+        "matched": result.mandatory_skills_matched,
+
+        "missing": result.mandatory_skills_missing,
+
+        "preferred": result.preferred_skills_matched,
+
+        "strengths": result.strengths,
+
+        "weaknesses": result.weaknesses,
+
+        "improvements": result.improvement_suggestions,
+
+        "interview_focus": result.interview_focus,
+
+        "reasoning": result.reasoning
+
+    }
 
 if __name__ == "__main__":
 
@@ -188,66 +219,66 @@ if __name__ == "__main__":
 
         print("=" * 70)
 
-        print("Candidate :", result.candidate_name)
+        print("Candidate :", result["candidate_name"])
 
         print()
 
-        print("Mandatory Match :", result.mandatory_match_percentage, "%")
+        print("Mandatory Match :", result["mandatory_match"], "%")
 
-        print("Overall Score   :", result.overall_match_score)
+        print("Overall Score   :", result["overall_score"])
 
-        print("Decision        :", result.decision)
+        print("Decision        :", result["decision"])
 
         print()
 
         print("Matched Mandatory Skills")
 
-        print(result.mandatory_skills_matched)
+        print(result["matched"])
 
         print()
 
         print("Missing Mandatory Skills")
 
-        print(result.mandatory_skills_missing)
+        print(result["missing"])
 
         print()
 
         print("Preferred Skills")
 
-        print(result.preferred_skills_matched)
+        print(result["preferred"])
 
         print()
 
         print("Strengths")
 
-        for s in result.strengths:
+        for s in result["strengths"]:
             print("✓", s)
 
         print()
 
         print("Weaknesses")
 
-        for w in result.weaknesses:
+        for w in result["weaknesses"]:
             print("-", w)
 
         print()
 
         print("Improvement Suggestions")
 
-        for s in result.improvement_suggestions:
+        for s in result["improvements"]:
             print("•", s)
 
         print()
 
         print("Interview Focus")
 
-        for t in result.interview_focus:
+        for t in result["interview_focus"]:
             print("•", t)
 
         print()
 
         print("Reason")
 
-        print(result.reasoning)
+        print(result["reasoning"])
 
         print("=" * 70)
