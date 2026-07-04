@@ -70,6 +70,23 @@ Original Job Description:
 
     return response.text
 
+def save_rewritten_jd(
+    rewritten_jd: str,
+    filename: str = "Rewritten_Job_Description.txt"
+):
+    """
+    Save the rewritten job description to a text file.
+    """
+
+    with open(filename, "w", encoding="utf-8") as file:
+
+        file.write("=" * 80 + "\n")
+        file.write("HIREPILOT AI - REWRITTEN JOB DESCRIPTION\n")
+        file.write("=" * 80 + "\n\n")
+
+        file.write(rewritten_jd)
+
+    print(f"✓ Rewritten JD saved to {filename}")
 
 if __name__ == "__main__":
 
@@ -86,3 +103,5 @@ if __name__ == "__main__":
     print("REWRITTEN JOB DESCRIPTION")
     print("=" * 70)
     print(rewritten)
+
+    

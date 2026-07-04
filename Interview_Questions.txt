@@ -1,0 +1,38 @@
+================================================================================
+HIREPILOT AI - INTERVIEW QUESTIONS
+================================================================================
+
+Candidate : roy
+--------------------------------------------------------------------------------
+
+Technical Questions
+• The AI Engineer role involves optimizing AI model performance. Can you describe some common metrics used to evaluate the performance of a classification model, and how you would choose the right one for a given problem?
+• Given a database table named `Employees` with columns `employee_id`, `name`, `department`, and `salary`, write a SQL query to find the names of all employees who earn more than the average salary in their respective departments.
+• Explain the four pillars of Object-Oriented Programming (OOP) and demonstrate how you would apply encapsulation and inheritance in a Python class design for a system that manages different types of vehicles (e.g., Car, Motorcycle).
+
+Project Questions
+• In your 'AI Powered Smart Blind Stick' project, you mentioned it's 'AI-powered'. Can you elaborate on the specific 'AI' components or algorithms you implemented? What kind of data did it process, and how did these 'AI' elements contribute to the smart stick's functionality?
+• What were the biggest technical challenges you faced while developing the 'AI Powered Smart Blind Stick' project, and how did you overcome them? Can you describe a specific instance where you had to debug a complex issue?
+
+Behavioral Questions
+• Our role heavily involves Generative AI technologies, RAG pipelines, and Large Language Models, which aren't explicitly in your experience. Given your stated eagerness to learn, how do you plan to acquire and strengthen your skills in these specific areas, especially Machine Learning, to prepare for this role?
+• Tell me about a time you encountered a technical problem or task where you lacked the necessary knowledge or skills. How did you approach the situation, and what was the outcome?
+
+
+Candidate : jhon
+--------------------------------------------------------------------------------
+
+Technical Questions
+• Machine Learning is a mandatory skill for this role, though not explicitly detailed in your experience. Can you explain the difference between supervised and unsupervised learning, and provide a common real-world example for each?
+• Given your strong background in Data Structures and Algorithms, describe how you would design an efficient system to store and quickly retrieve a large collection of documents based on keywords, considering the potential need for future similarity searches.
+• Explain the four pillars of Object-Oriented Programming and how you would apply these principles when designing a Python class to interact with a SQL database, perhaps for managing user profiles in an application.
+
+Project Questions
+• Tell us about your 'Secure Online Examination Monitoring System' project. What were your specific contributions to its design and implementation, and what was the most significant technical challenge you faced and how did you overcome it?
+• Considering your experience with the 'Secure Online Examination Monitoring System', how might you adapt or extend its features using an AI approach, for example, to detect unusual patterns or anomalies in user behavior during an exam? What steps would you take to research and learn the necessary AI techniques?
+
+Behavioral Questions
+• Our AI Engineer role requires strong Machine Learning skills, which is not explicitly highlighted in your experience. What steps have you taken or plan to take to bridge this skill gap, and how do you approach learning a completely new technology or framework quickly?
+• Describe a time when you encountered a significant technical roadblock while working on a project. How did you approach problem-solving, and did you seek help from others? What was the outcome?
+
+

@@ -1,0 +1,38 @@
+================================================================================
+HIREPILOT AI - REWRITTEN JOB DESCRIPTION
+================================================================================
+
+**AI Engineer**
+
+**Location:** Hyderabad, Telangana
+**Employment Type:** Full-Time
+**Experience:** 0-2 Years
+
+**About the Role:**
+Are you a passionate and aspiring AI Engineer eager to dive into the world of Generative AI and build intelligent applications? We are seeking a talented individual with a strong foundation in programming and machine learning to join our innovative team in Hyderabad. This is an exciting opportunity for early-career professionals to work on cutting-edge AI technologies, transform business processes, and make a tangible impact. If you are driven by curiosity and a desire to create intelligent solutions, we encourage you to apply!
+
+**Key Responsibilities:**
+*   Design, develop, and deploy innovative AI-powered applications, with a primary focus on Generative AI solutions.
+*   Construct and optimize robust Retrieval-Augmented Generation (RAG) pipelines to enhance model knowledge and response quality.
+*   Seamlessly integrate Large Language Models (LLMs) into diverse business workflows, systems, and platforms.
+*   Monitor, evaluate, and optimize the performance, efficiency, and scalability of AI models and systems.
+*   Collaborate closely with cross-functional software development, product, and research teams to deliver end-to-end AI solutions.
+
+**Required Qualifications:**
+
+**Education:**
+*   Bachelor's degree in Computer Science, Artificial Intelligence, Information Technology, or a closely related quantitative field.
+
+**Technical Skills:**
+*   **Programming:** Strong proficiency in Python, including Object-Oriented Programming (OOP) principles.
+*   **Data & Algorithms:** Solid understanding of Data Structures and Algorithms.
+*   **Machine Learning:** Fundamental knowledge and practical experience with Machine Learning concepts and techniques.
+*   **Databases:** Experience with SQL for data manipulation and querying.
+*   **Version Control:** Proficiency with Git for collaborative development.
+
+**Preferred Qualifications:**
+*   Familiarity with containerization technologies like Docker.
+*   Experience with modern AI frameworks.
+*   Knowledge of LangChain and LangGraph.
+*   Understanding of vector databases (e.g., ChromaDB).
+*   Experience building APIs with frameworks such as FastAPI.

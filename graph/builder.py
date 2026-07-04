@@ -114,7 +114,7 @@ builder.add_node("rewrite", rewrite_node)
 
 builder.add_node("retrieve", retrieve_node)
 
-builder.add_node("screen", screening_node)
+builder.add_node("screen", screen_node)
 
 builder.add_node("interview", interview_node)
 

@@ -1,15 +1,13 @@
 """
 graph/state.py
 
-Shared state passed between LangGraph nodes.
+Shared workflow state used by LangGraph.
 """
 
 from typing import TypedDict, List, Optional
 
 from schemas.job_schema import JobSchema
 from schemas.report_schema import FinalReport
-from schemas.screening_schema import ScreeningResult
-from schemas.interview_schema import InterviewSchema
 
 
 class GraphState(TypedDict):
@@ -17,7 +15,7 @@ class GraphState(TypedDict):
     # Raw Input
     job_description: str
 
-    # Parsed JD
+    # Parsed Job Description
     parsed_job: Optional[JobSchema]
 
     # Rewritten JD
@@ -27,13 +25,12 @@ class GraphState(TypedDict):
     retrieved_candidates: List[dict]
 
     # Screening Results
-    screened_candidates: List[ScreeningResult]
+    screened_candidates: List[dict]
 
     # Interview Questions
-    interview_questions: List[InterviewSchema]
-
-    # Recruiter Decision
-    approval: bool
+    interview_questions: List[dict]
 
     # Final Report
     final_report: Optional[FinalReport]
+
+    reviewed_candidates: list

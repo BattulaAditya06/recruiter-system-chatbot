@@ -1,11 +1,12 @@
 """
 interview_questions.py
+
+Generates personalized interview questions.
 """
 
 from google import genai
 
 from config import GEMINI_API_KEY, MODEL_NAME
-
 from schemas.interview_schema import InterviewSchema
 
 client = genai.Client(api_key=GEMINI_API_KEY)
@@ -18,25 +19,21 @@ Generate personalized interview questions.
 
 Rules
 
-Use only the supplied Job Description and Candidate Evaluation.
+Use ONLY the supplied Job Description and Candidate Evaluation.
 
-Generate
+Generate:
 
-3 Technical Questions
+- 3 Technical Questions
+- 2 Project Questions
+- 2 Behavioral Questions
 
-2 Project Questions
+The questions should evaluate:
 
-2 Behavioural Questions
+• Missing mandatory skills
+• Candidate strengths
+• Candidate projects
 
-The questions must evaluate:
-
-- Missing mandatory skills
-- Candidate strengths
-- Candidate projects
-
-Do not ask generic questions.
-
-Return only structured JSON.
+Return structured JSON only.
 """
 
 
@@ -62,16 +59,69 @@ Candidate Evaluation
         ],
 
         config={
-
             "response_schema": InterviewSchema,
-
             "response_mime_type": "application/json"
-
         }
 
     )
 
-    return response.parsed
+    result = response.parsed
+
+    return {
+
+        "candidate_name": screening["candidate_name"],
+
+        "technical_questions": [
+            q.question for q in result.technical_questions
+        ],
+
+        "project_questions": [
+            q.question for q in result.project_questions
+        ],
+
+        "behavioral_questions": [
+            q.question for q in result.behavioral_questions
+        ]
+
+    }
+
+
+def save_questions(interview_results,
+                   filename="Interview_Questions.txt"):
+
+    with open(filename, "w", encoding="utf-8") as file:
+
+        file.write("=" * 80 + "\n")
+        file.write("HIREPILOT AI - INTERVIEW QUESTIONS\n")
+        file.write("=" * 80 + "\n\n")
+
+        for candidate in interview_results:
+
+            file.write(
+                f"Candidate : {candidate['candidate_name']}\n"
+            )
+
+            file.write("-" * 80 + "\n")
+
+            file.write("\nTechnical Questions\n")
+
+            for q in candidate["technical_questions"]:
+                file.write(f"• {q}\n")
+
+            file.write("\nProject Questions\n")
+
+            for q in candidate["project_questions"]:
+                file.write(f"• {q}\n")
+
+            file.write("\nBehavioral Questions\n")
+
+            for q in candidate["behavioral_questions"]:
+                file.write(f"• {q}\n")
+
+            file.write("\n\n")
+
+    print(f"✓ Interview Questions saved to {filename}")
+
 
 if __name__ == "__main__":
 
@@ -86,11 +136,11 @@ if __name__ == "__main__":
 
     candidates = retrieve_candidate_evidence(jd.description)
 
-    best_candidate = screen_candidate(jd, candidates[0])
+    screened = screen_candidate(jd, candidates[0])
 
     questions = generate_interview_questions(
         jd,
-        best_candidate
+        screened
     )
 
     print("=" * 70)
@@ -99,15 +149,17 @@ if __name__ == "__main__":
 
     print("\nTechnical Questions")
 
-    for q in questions.technical_questions:
-        print("-", q.question)
+    for q in questions["technical_questions"]:
+        print("-", q)
 
     print("\nProject Questions")
 
-    for q in questions.project_questions:
-        print("-", q.question)
+    for q in questions["project_questions"]:
+        print("-", q)
 
-    print("\nBehavioural Questions")
+    print("\nBehavioral Questions")
 
-    for q in questions.behavioral_questions:
-        print("-", q.question)
+    for q in questions["behavioral_questions"]:
+        print("-", q)
+
+    save_questions([questions])

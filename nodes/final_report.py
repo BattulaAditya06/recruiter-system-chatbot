@@ -134,6 +134,61 @@ def print_report(report: FinalReport):
         print("\n" + "=" * 80)
 
 
+def save_report(report, filename="Recruitment_Report.txt"):
+
+    with open(filename, "w", encoding="utf-8") as f:
+
+        f.write("=" * 80 + "\n")
+
+        f.write("HirePilot AI Recruitment Report\n")
+
+        f.write("=" * 80 + "\n\n")
+
+        f.write(f"Job Title : {report.job_title}\n")
+
+        f.write(f"Candidates Screened : {report.candidates_screened}\n")
+
+        f.write(f"Shortlisted : {report.shortlisted}\n")
+
+        f.write(f"Hold : {report.hold}\n")
+
+        f.write(f"Rejected : {report.rejected}\n\n")
+
+        for candidate in report.reports:
+
+            f.write("-" * 80 + "\n")
+
+            f.write(f"Candidate : {candidate.candidate_name}\n")
+
+            f.write(f"Decision : {candidate.decision}\n")
+
+            f.write(f"Overall Score : {candidate.overall_score}\n")
+
+            f.write(f"Mandatory Match : {candidate.mandatory_match}%\n\n")
+
+            f.write("Strengths\n")
+
+            for item in candidate.strengths:
+                f.write(f"  ✓ {item}\n")
+
+            f.write("\nWeaknesses\n")
+
+            for item in candidate.weaknesses:
+                f.write(f"  ✗ {item}\n")
+
+            f.write("\nInterview Focus\n")
+
+            for item in candidate.interview_focus:
+                f.write(f"  • {item}\n")
+
+            f.write("\nReasoning\n")
+
+            f.write(candidate.reasoning)
+
+            f.write("\n\n")
+
+    print(f"\nReport saved as {filename}")
+
 if __name__ == "__main__":
 
     from rag.loader import load_job_description
