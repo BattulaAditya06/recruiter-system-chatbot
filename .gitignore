@@ -1,0 +1,15 @@
+__pycache__/
+
+*.pyc
+
+.env
+
+data/chroma_store/
+
+logs/
+
+.venv/
+
+.vscode/
+
+.idea/

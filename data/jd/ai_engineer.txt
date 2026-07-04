@@ -1,0 +1,35 @@
+Job Title: AI Engineer
+
+Location: Hyderabad, Telangana
+
+Employment Type: Full-Time
+
+Experience: 0-2 Years
+
+Education:
+Bachelor's degree in Computer Science, Artificial Intelligence, Information Technology, or related field.
+
+Mandatory Skills:
+- Python
+- SQL
+- Machine Learning
+- Data Structures and Algorithms
+- Object Oriented Programming
+- Git
+
+Preferred Skills:
+- Docker
+- LangChain
+- LangGraph
+- ChromaDB
+- FastAPI
+
+Responsibilities:
+- Develop AI-powered applications.
+- Build Retrieval-Augmented Generation (RAG) pipelines.
+- Integrate Large Language Models into business workflows.
+- Optimize AI model performance.
+- Collaborate with software development teams.
+
+Job Description:
+We are looking for a passionate AI Engineer to build intelligent applications using Generative AI technologies. The candidate should have strong programming skills in Python and experience with machine learning concepts. Knowledge of LangChain, vector databases, and modern AI frameworks will be an added advantage.
